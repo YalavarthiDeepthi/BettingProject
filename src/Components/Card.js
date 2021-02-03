@@ -72,7 +72,7 @@ function SimpleCard({ name, selectionButtons, Id, sideNavData, getSideNavData })
     const bull = <span className={classes.bullet}>•</span>;
 
     const handleClick = (nameId, selection, marketName) => {
-        const tempObj = [ ...sideNavData ];
+        let tempObj = [ ...sideNavData ];
         const existing = [];
         tempObj.map((value) => (
             existing.push(value.id)
@@ -87,6 +87,9 @@ function SimpleCard({ name, selectionButtons, Id, sideNavData, getSideNavData })
                 selection["secondaryName"]=" to win"
             else
                 selection["secondaryName"]=" to Score First"
+                selection["EventId"]=nameId;
+            
+            tempObj=tempObj.filter(data=>(data.secondaryName!=selection["secondaryName"] || data.EventId!=nameId))
              tempObj.push(selection)
             getSideNavData(tempObj);
         }
